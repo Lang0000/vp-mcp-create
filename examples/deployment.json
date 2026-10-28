@@ -1,0 +1,19 @@
+{
+  "type": "deployment",
+  "name": "Тест: діаграма розгортання",
+  "nodes": [
+    {"id": "pc", "kind": "device", "name": "Робоча станція (GPU)"},
+    {"id": "env", "kind": "execution_environment", "name": "Python 3.11 + PyTorch", "parent": "pc"},
+    {"id": "train", "kind": "artifact", "name": "train.py", "parent": "env"},
+    {"id": "weights", "kind": "artifact", "name": "best.pt", "parent": "env"},
+    {"id": "nas", "kind": "device", "name": "Сховище даних (NAS)"},
+    {"id": "data", "kind": "artifact", "name": "dataset/", "parent": "nas"},
+    {"id": "uav", "kind": "device", "name": "Бортовий комп'ютер БПЛА"},
+    {"id": "infer", "kind": "artifact", "name": "detector.onnx", "parent": "uav"}
+  ],
+  "edges": [
+    {"from": "pc", "to": "nas", "kind": "association", "label": "SMB / 1 Гбіт/с"},
+    {"from": "pc", "to": "uav", "kind": "association", "label": "USB"},
+    {"from": "infer", "to": "weights", "kind": "dependency", "label": "конвертовано з"}
+  ]
+}

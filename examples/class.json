@@ -1,0 +1,32 @@
+{
+  "type": "class",
+  "name": "Тест: діаграма класів",
+  "nodes": [
+    {"id": "img", "kind": "class", "name": "ThermalImage",
+     "attributes": ["+path: str", "+width: int", "+height: int", "-кадр: ndarray"],
+     "operations": ["+load(path: str): Tensor", "+normalize(): None"]},
+    {"id": "ann", "kind": "class", "name": "Annotation",
+     "attributes": ["+boxes: Box[0..*]", "+клас: str"]},
+    {"id": "ds", "kind": "class", "name": "Dataset",
+     "attributes": ["+root: str", "+split: str = \"train\""],
+     "operations": ["+__len__(): int", "+__getitem__(i: int): ThermalImage"]},
+    {"id": "base", "kind": "abstract_class", "name": "BaseDataset",
+     "operations": ["{abstract} +__getitem__(i: int): Any"]},
+    {"id": "det", "kind": "interface", "name": "Detector",
+     "operations": ["+predict(img: Tensor): List[Box]"]},
+    {"id": "yolo", "kind": "class", "name": "YoloDetector",
+     "attributes": ["+weights: str", "+conf: float = 0.25"],
+     "operations": ["+predict(img: Tensor): List[Box]"],
+     "style": {"fill": "#FFF2CC", "line_color": "#BF9000", "bold": true}},
+    {"id": "note", "kind": "note", "name": "Тепловізійні кадри зберігаються у форматі 16-bit TIFF"}
+  ],
+  "edges": [
+    {"from": "img", "to": "ann", "kind": "association", "label": "має", "multiplicity": {"from": "1", "to": "0..*"}},
+    {"from": "ds", "to": "img", "kind": "composition", "multiplicity": {"from": "1", "to": "1..*"}},
+    {"from": "ds", "to": "base", "kind": "generalization"},
+    {"from": "yolo", "to": "det", "kind": "realization"},
+    {"from": "yolo", "to": "img", "kind": "dependency", "label": "обробляє"},
+    {"from": "note", "to": "img", "kind": "anchor"}
+  ],
+  "layout": "auto"
+}

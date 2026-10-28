@@ -1,0 +1,18 @@
+{
+  "type": "sequence",
+  "name": "Тест: діаграма послідовності",
+  "nodes": [
+    {"id": "u", "kind": "actor", "name": "Дослідник"},
+    {"id": "cli", "kind": "lifeline", "name": "train.py"},
+    {"id": "ds", "kind": "lifeline", "name": "Dataset"},
+    {"id": "m", "kind": "lifeline", "name": "YOLO"}
+  ],
+  "edges": [
+    {"from": "u", "to": "cli", "label": "запустити(config)"},
+    {"from": "cli", "to": "ds", "label": "load()"},
+    {"from": "ds", "to": "cli", "label": "batches", "kind": "message"},
+    {"from": "cli", "to": "m", "label": "train(batches)"},
+    {"from": "m", "to": "cli", "label": "metrics"},
+    {"from": "cli", "to": "u", "label": "звіт", "async": true}
+  ]
+}

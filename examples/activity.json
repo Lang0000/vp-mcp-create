@@ -1,0 +1,31 @@
+{
+  "type": "activity",
+  "name": "Тест: діаграма діяльності",
+  "nodes": [
+    {"id": "lr", "kind": "partition", "name": "Дослідник"},
+    {"id": "ls", "kind": "partition", "name": "Система"},
+    {"id": "start", "kind": "initial", "parent": "lr"},
+    {"id": "a1", "kind": "action", "name": "Обрати конфігурацію експерименту", "parent": "lr"},
+    {"id": "a2", "kind": "action", "name": "Завантажити дані", "parent": "ls"},
+    {"id": "f", "kind": "fork", "parent": "ls"},
+    {"id": "a3", "kind": "action", "name": "Навчити модель", "parent": "ls"},
+    {"id": "a4", "kind": "action", "name": "Записати журнал метрик", "parent": "ls"},
+    {"id": "j", "kind": "join", "parent": "ls"},
+    {"id": "d", "kind": "decision", "parent": "lr"},
+    {"id": "a5", "kind": "action", "name": "Сформувати висновок", "parent": "lr"},
+    {"id": "end", "kind": "final", "parent": "lr"}
+  ],
+  "edges": [
+    {"from": "start", "to": "a1"},
+    {"from": "a1", "to": "a2"},
+    {"from": "a2", "to": "f"},
+    {"from": "f", "to": "a3"},
+    {"from": "f", "to": "a4"},
+    {"from": "a3", "to": "j"},
+    {"from": "a4", "to": "j"},
+    {"from": "j", "to": "d"},
+    {"from": "d", "to": "a1", "label": "[mAP < 0.5]"},
+    {"from": "d", "to": "a5", "label": "[mAP ≥ 0.5]"},
+    {"from": "a5", "to": "end"}
+  ]
+}

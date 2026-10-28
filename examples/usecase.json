@@ -1,0 +1,23 @@
+{
+  "type": "usecase",
+  "name": "Тест: діаграма варіантів використання",
+  "nodes": [
+    {"id": "res", "kind": "actor", "name": "Дослідник"},
+    {"id": "op", "kind": "actor", "name": "Оператор БПЛА"},
+    {"id": "sys", "kind": "system", "name": "Система виявлення об'єктів"},
+    {"id": "uc1", "kind": "usecase", "name": "Завантажити тепловізійний датасет", "parent": "sys"},
+    {"id": "uc2", "kind": "usecase", "name": "Навчити модель YOLO", "parent": "sys"},
+    {"id": "uc3", "kind": "usecase", "name": "Оцінити якість моделі", "parent": "sys"},
+    {"id": "uc4", "kind": "usecase", "name": "Перевірити розмітку", "parent": "sys"},
+    {"id": "uc5", "kind": "usecase", "name": "Виявити об'єкти на кадрі", "parent": "sys"},
+    {"id": "uc6", "kind": "usecase", "name": "Експортувати звіт", "parent": "sys"}
+  ],
+  "edges": [
+    {"from": "res", "to": "uc1"},
+    {"from": "res", "to": "uc2"},
+    {"from": "res", "to": "uc3"},
+    {"from": "op", "to": "uc5"},
+    {"from": "uc1", "to": "uc4", "kind": "include"},
+    {"from": "uc6", "to": "uc3", "kind": "extend", "condition": "потрібен звіт"}
+  ]
+}

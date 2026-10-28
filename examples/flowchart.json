@@ -1,0 +1,18 @@
+{
+  "type": "flowchart",
+  "name": "Тест: блок-схема",
+  "nodes": [
+    {"id": "s", "kind": "start", "name": "Початок"},
+    {"id": "in", "kind": "data", "name": "Ввести шлях до датасету"},
+    {"id": "p1", "kind": "process", "name": "Завантажити зображення"},
+    {"id": "d", "kind": "decision", "name": "Є ще кадри?"},
+    {"id": "p2", "kind": "process", "name": "Виявити об'єкти"},
+    {"id": "out", "kind": "document", "name": "Звіт"},
+    {"id": "e", "kind": "end", "name": "Кінець"}
+  ],
+  "edges": [
+    {"from": "s", "to": "in"}, {"from": "in", "to": "p1"}, {"from": "p1", "to": "d"},
+    {"from": "d", "to": "p2", "label": "так"}, {"from": "p2", "to": "d"},
+    {"from": "d", "to": "out", "label": "ні"}, {"from": "out", "to": "e"}
+  ]
+}

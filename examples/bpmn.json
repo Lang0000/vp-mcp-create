@@ -1,0 +1,19 @@
+{
+  "type": "bpmn",
+  "name": "Тест: BPMN процес",
+  "nodes": [
+    {"id": "pool", "kind": "pool", "name": "Лабораторія"},
+    {"id": "l1", "kind": "lane", "name": "Дослідник", "parent": "pool"},
+    {"id": "l2", "kind": "lane", "name": "Сервер", "parent": "pool"},
+    {"id": "s", "kind": "start_event", "parent": "l1"},
+    {"id": "t1", "kind": "task", "name": "Підготувати дані", "parent": "l1"},
+    {"id": "t2", "kind": "task", "name": "Навчити модель", "parent": "l2"},
+    {"id": "g", "kind": "gateway", "gateway": "xor", "name": "Якість достатня?", "parent": "l1"},
+    {"id": "t3", "kind": "task", "name": "Написати звіт", "parent": "l1"},
+    {"id": "e", "kind": "end_event", "parent": "l1"}
+  ],
+  "edges": [
+    {"from": "s", "to": "t1"}, {"from": "t1", "to": "t2"}, {"from": "t2", "to": "g"},
+    {"from": "g", "to": "t3", "label": "так"}, {"from": "g", "to": "t1", "label": "ні"}, {"from": "t3", "to": "e"}
+  ]
+}

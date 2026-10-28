@@ -1,0 +1,15 @@
+{
+  "type": "component",
+  "name": "Тест: діаграма компонентів",
+  "nodes": [
+    {"id": "ui", "kind": "component", "name": "CLI"},
+    {"id": "core", "kind": "component", "name": "Training core"},
+    {"id": "data", "kind": "component", "name": "Data loader"},
+    {"id": "iface", "kind": "interface", "name": "IDetector"}
+  ],
+  "edges": [
+    {"from": "ui", "to": "core", "kind": "usage"},
+    {"from": "core", "to": "data", "kind": "dependency"},
+    {"from": "core", "to": "iface", "kind": "realization"}
+  ]
+}
